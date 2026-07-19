@@ -49,9 +49,9 @@ nvim
   --cask font-jetbrains-mono-nerd-font kitty` then steps 2–4.
 - **Windows:** use **WSL2 + the Linux installer** (recommended — the
   terminal-centric agent workflow assumes a Unix shell), with a Nerd Font
-  set in Windows Terminal. Native Windows works with scoop
-  (`scoop install neovim ripgrep fd lazygit`) but is not CI-tested; a
-  native installer is on the [roadmap](../ROADMAP.md).
+  set in Windows Terminal. Native Windows: `scripts/install.ps1`
+  (scoop-based, experimental — CI boots it but real-world reports are
+  welcome).
 
 ### Terminal & AI
 

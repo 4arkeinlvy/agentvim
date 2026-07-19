@@ -95,10 +95,10 @@ Open the `.ipynb` (it appears as Markdown via jupytext; saving writes real
 | `Space j o` / `Space j h` | Show / hide output |
 | `Space j s` / `Space j R` | Interrupt / restart |
 
-Text and dataframe outputs render inline. For inline **plots**, add
-[image.nvim](https://github.com/3rd/image.nvim) and set
-`vim.g.molten_image_provider = "image.nvim"` in `lua/plugins/jupyter.lua`
-(requires kitty/WezTerm).
+Text and dataframe outputs render inline everywhere. Inline **plots** are
+one toggle away: set `vim.g.agentvim_inline_images = true` in
+`lua/config/options.lua`, restart, `:Lazy sync` (requires kitty/WezTerm +
+ImageMagick).
 
 ## LaTeX
 

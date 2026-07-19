@@ -40,3 +40,29 @@ jobs:
           echo "$out" | grep -q "boot-ok"
       - name: Verify script
         run: bash scripts/verify.sh || true
+
+  boot-windows:
+    name: Headless boot on Windows (experimental)
+    runs-on: windows-latest
+    continue-on-error: true
+    steps:
+      - uses: actions/checkout@v4
+      - name: Install Neovim
+        shell: pwsh
+        run: |
+          curl.exe -fsSLo nvim.zip https://github.com/neovim/neovim/releases/latest/download/nvim-win64.zip
+          Expand-Archive nvim.zip -DestinationPath C:\
+          "C:\nvim-win64\bin" | Out-File -Append $env:GITHUB_PATH
+      - name: Use repo as config
+        shell: pwsh
+        run: |
+          New-Item -ItemType Directory -Force "$env:LOCALAPPDATA" | Out-Null
+          New-Item -ItemType SymbolicLink -Path "$env:LOCALAPPDATA\nvim" -Target "$env:GITHUB_WORKSPACE"
+      - name: Install plugins from lockfile
+        run: nvim --headless "+Lazy! restore" +qa
+      - name: Boot check
+        shell: pwsh
+        run: |
+          $out = nvim --headless "+lua vim.print('boot-ok')" +qa 2>&1 | Out-String
+          Write-Host $out
+          if ($out -notmatch "boot-ok") { exit 1 }

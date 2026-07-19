@@ -18,6 +18,16 @@ scratch — you get a battle-tested base maintained by the ecosystem's core
 contributors, plus a small, fully documented AI/notebook/LaTeX layer on top.
 **Startup: ~25 ms.**
 
+![AgentVim dashboard](assets/screenshots/dashboard.png)
+
+<details>
+<summary>More: which-key discovery · fuzzy find & grep (GIF)</summary>
+
+![Which-key: press Space and read](assets/screenshots/which-key.png)
+![Find files and grep](assets/gifs/find-files.gif)
+
+</details>
+
 ## Why this exists
 
 - VSCode + AI extensions is heavy and mouse-driven. Terminal agents (Claude
@@ -102,6 +112,7 @@ Coming from VSCode? The full shortcut map is in
 | [ai.md](docs/ai.md) | AI architecture; Claude Code vs Codex vs Gemini vs Avante vs CodeCompanion |
 | [agent-orchestration.md](docs/agent-orchestration.md) | Running multiple agents on one repo |
 | [context.md](docs/context.md) | Context engineering: CLAUDE.md, AGENTS.md, ADRs, project memory |
+| [mcp.md](docs/mcp.md) | MCP server presets (Playwright, Postgres, GitHub, K8s) |
 | [workflows.md](docs/workflows.md) | End-to-end engineering workflows (FastAPI, React, K8s, notebooks…) |
 | [architecture.md](docs/architecture.md) | Why every major dependency was chosen |
 | [plugins.md](docs/plugins.md) | Full plugin decision matrix |

@@ -48,6 +48,24 @@ Escalate in order; each step is bigger:
 
 `scripts/verify.sh` after any recovery confirms the result.
 
+## Known issue: tree-sitter CLI vs older glibc (Ubuntu 22.04 and kin)
+
+Symptom: treesitter parser installs fail with
+``GLIBC_2.39' not found`` — recent prebuilt `tree-sitter` binaries (Mason's
+included) target newer glibc, and nvim-treesitter (main branch) builds every
+parser through that CLI.
+
+Fix — install a compatible version and put it where Mason looks:
+
+```bash
+npm install -g tree-sitter-cli@0.25.10
+cp ~/.local/lib/node_modules/tree-sitter-cli/tree-sitter \
+   ~/.local/share/nvim/mason/packages/tree-sitter-cli/tree-sitter-linux-x64
+```
+
+Note: a Mason update of `tree-sitter-cli` re-breaks it — re-copy after, or
+skip that package when updating.
+
 ## Version pinning policy
 
 - `lazy-lock.json` **is** the pin — committed, always.

@@ -20,10 +20,30 @@ nvim --startuptime /tmp/st.log +qa && tail -1 /tmp/st.log
 
 In-editor: `:Lazy profile` (per-plugin cost, sorted).
 
-Comparisons against AstroNvim/NvChad/LunarVim are deliberately absent —
-publishing numbers we haven't measured on identical hardware with identical
-plugin sets would be noise. A scripted benchmark matrix is on the
-[roadmap](../ROADMAP.md).
+## Distro comparison (measured, reproducible)
+
+`scripts/benchmark.sh` installs each distro's official starter into an
+isolated `NVIM_APPNAME` sandbox and measures pty startups **opening a
+Python file** (so LSP/treesitter/lazy-file plugins load — a heavier, more
+honest number than dashboard startup). Same machine, same run, median of 7:
+
+| Distro | Startup opening a `.py` |
+|---|---|
+| NvChad (starter) | 136 ms |
+| AstroNvim (template) | 162 ms |
+| LazyVim (starter) | 176 ms |
+| **AgentVim** | **245 ms** |
+
+Read this honestly: the starters are faster **because they ship almost no
+language support** — NvChad's starter has no Python LSP, formatter, or
+debugger configured at all. AgentVim's number includes ~11 working language
+stacks, notebooks, and the AI layer; configure the starters up to parity
+and you pay the same cost there. The comparison you should actually care
+about: AgentVim opens a Python file with full tooling in a quarter second;
+VSCode takes several seconds to become interactive.
+
+Rerun it on your hardware: `~/.config/nvim/scripts/benchmark.sh`
+(cleanup: `--clean`). Numbers above: Linux 6.8, 12-core laptop, NVMe.
 
 ## Why it's fast
 

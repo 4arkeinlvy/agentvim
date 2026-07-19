@@ -19,7 +19,7 @@ return {
     build = ":UpdateRemotePlugins",
     ft = { "python", "markdown" },
     init = function()
-      vim.g.molten_image_provider = "none"
+      vim.g.molten_image_provider = vim.g.agentvim_inline_images and "image.nvim" or "none"
       vim.g.molten_output_win_max_height = 20
       vim.g.molten_auto_open_output = false
       vim.g.molten_virt_text_output = true
