@@ -1,0 +1,9 @@
+# personal planning notes — not part of the distribution
+nvim_brainstorming.md
+audit_nvim.md
+NVIM_GUIDE.md
+
+# runtime artifacts
+tt.*
+.tests/
+.repro/
