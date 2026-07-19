@@ -1,0 +1,17 @@
+{
+  "$comment": "Project-scoped MCP servers — copy to your repo root as .mcp.json and delete what you don't use. See docs/mcp.md. Env vars in ${VAR} form are expanded from the environment.",
+  "mcpServers": {
+    "playwright": {
+      "command": "npx",
+      "args": ["-y", "@playwright/mcp@latest"]
+    },
+    "db": {
+      "command": "npx",
+      "args": [
+        "-y",
+        "@modelcontextprotocol/server-postgres",
+        "${DATABASE_URL_READONLY}"
+      ]
+    }
+  }
+}

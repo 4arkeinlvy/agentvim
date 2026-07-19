@@ -25,11 +25,11 @@ Everything else reads. This single rule eliminates 90% of multi-agent chaos:
 - Claude implementing? Codex/Gemini run in *ask/plan mode* (or you simply
   don't ask them to edit).
 - Need two agents implementing in parallel? Give each its own branch via
-  `git worktree`:
+  `git worktree` — `scripts/worktree.sh` wraps it:
 
   ```bash
-  git worktree add ../myproject-codex feature/codex-attempt
-  # window 2: cd ../myproject-codex && codex
+  ~/.config/nvim/scripts/worktree.sh add codex-attempt
+  # window 2: cd ../myproject-codex-attempt && codex
   ```
 
   Same repo, isolated trees, merge the winner. Claude Code's built-in
