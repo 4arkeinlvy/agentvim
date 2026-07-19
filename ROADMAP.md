@@ -1,37 +1,54 @@
 # Roadmap
 
-## v0.1 — now (Stable Beginner Edition)
+## Delivered
+
+### v0.1 — Stable Beginner Edition
 
 - LazyVim base + AI/notebook/LaTeX layer, lockfile-pinned
 - Claude Code protocol integration; Codex/Gemini terminal workflows
-- Full docs set: architecture, AI, orchestration, context engineering,
-  workflows, 10-day learning path, VSCode migration
+- Docs: architecture, AI, orchestration, context engineering, workflows,
+  10-day learning path, VSCode migration
 - Linux/macOS installer + verify/update/uninstall scripts, CI
 
-## v0.2 — polish
+### v0.2 — Polish
 
-- Real screenshots & GIFs ([assets/screenshots](assets/screenshots/README.md)
-  — contributions wanted)
-- Inline notebook images preset (image.nvim + kitty) behind one toggle
-- Scripted benchmark matrix vs LazyVim/AstroNvim/NvChad on identical
-  hardware ([docs/performance.md](docs/performance.md))
-- Native Windows install path (scoop) with CI coverage
+- Real screenshots + GIF, recorded reproducibly with vhs
+  (`assets/tapes/*.tape` — rerun them to regenerate)
+- Inline notebook plots behind one toggle (`vim.g.agentvim_inline_images`)
+- Scripted, isolated benchmark vs LazyVim / AstroNvim / NvChad
+  (`scripts/benchmark.sh`, results in [docs/performance.md](docs/performance.md))
+- Windows: `scripts/install.ps1` (scoop) + experimental CI boot job
 
-## v0.3 — deeper agent integration
+### v0.3 — Deeper agent integration
 
-- MCP server presets (filesystem, git, Postgres, Playwright) with setup
-  docs per server
-- Prompt/slash-command library in `templates/` (review, ADR, incident,
-  refactor)
-- Git worktree helpers for parallel-agent workflows
+- MCP presets with per-server guidance ([docs/mcp.md](docs/mcp.md),
+  `templates/mcp.json`)
+- Slash-command library: `/review`, `/adr`, `/incident`, `/refactor`
+  (`templates/commands/`)
+- Parallel-agent worktree helper (`scripts/worktree.sh`)
 
-## v1.0 — stability promise
+### v1.0
 
-- Semantic versioning; breaking keybinding/config changes only on majors
-- Migration notes per release
-- Project templates (fastapi, react, research/LaTeX, k8s) — each with
-  CLAUDE.md, ADR seed, and recommended layout per
-  [docs/context.md](docs/context.md)
+- Project templates with CLAUDE.md + ADR seeds: fastapi, react,
+  research/LaTeX, k8s (`templates/projects/`)
+- Versioning promise (below)
+
+## Versioning promise (v1.0+)
+
+- **Semantic versioning.** Keybinding removals/changes and config-breaking
+  changes only in majors; new plugins/extras in minors; lockfile bumps and
+  docs in patches.
+- Every release ships migration notes in the CHANGELOG.
+- `lazy-lock.json` on a release tag is a tested set — installing from a tag
+  is always reproducible.
+
+## Next
+
+- Expand the GIF library (AI diff review, git, notebook runs — tapes
+  welcome, see [assets/screenshots](assets/screenshots/README.md))
+- Benchmark job in CI (scheduled, tracked over time)
+- MCP preset expansion (MongoDB, browser-use) as servers mature
+- Session/project switcher polish for multi-repo agent work
 
 ## Non-goals
 
