@@ -57,6 +57,29 @@ Rerun it on your hardware: `~/.config/nvim/scripts/benchmark.sh`
 5. **No duplicate functionality** — the plugin matrix
    ([plugins.md](plugins.md)) exists to keep it that way.
 
+## "Should parts be rewritten in Rust?"
+
+Asked often enough to answer here: **the hot paths already are native.**
+blink.cmp's fuzzy matcher is Rust, treesitter parsers are compiled C,
+ripgrep/fd are Rust, LSP servers are external native processes. What
+remains is ~2k lines of Lua *configuration* running under LuaJIT with
+bytecode caching (`vim.loader`) — it isn't the bottleneck, and Neovim
+plugins must expose Lua anyway, so a rewrite would add FFI complexity for
+single-digit milliseconds.
+
+Where file-open time actually goes, in order: LSP server spawn (pyright +
+ruff), treesitter parser attach, completion/UI plugin init. The honest
+levers, safest first:
+
+1. **Remove language stacks you don't use** — each extra import in
+   `lua/config/lazy.lua` is one line; deleting unused ones is the biggest
+   legitimate win.
+2. **Lazy-load discipline** — everything new must declare `event`/`ft`/
+   `keys`. (v1.0.1 example: jupytext moved from startup to
+   `BufReadCmd *.ipynb`.)
+3. **Accept that LSP attach is async** — the buffer is editable
+   immediately; `--startuptime` overstates felt latency.
+
 ## Keeping it fast
 
 - After adding a plugin: check `:Lazy profile`. Budget: nothing above

@@ -1,5 +1,14 @@
 # Changelog
 
+## v1.0.1 — 2026-07-19
+
+- perf: jupytext.nvim now lazy-loads on `BufReadCmd *.ipynb` instead of at
+  startup (verified: `.ipynb` conversion still works; saves startup time on
+  launches that never open a notebook)
+- docs: performance.md answers "rewrite it in Rust?" and documents where
+  file-open time actually goes + the safe optimization levers
+- Migration notes: none.
+
 ## v1.0.0 — 2026-07-19
 
 **The stability line.** From here: semver, migration notes per release,

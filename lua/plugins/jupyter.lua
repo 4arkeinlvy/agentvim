@@ -6,7 +6,10 @@
 return {
   {
     "GCBallesteros/jupytext.nvim",
-    lazy = false, -- must be loaded before an .ipynb buffer is read
+    -- jupytext intercepts reads via BufReadCmd, so lazy-load on exactly that
+    -- event; loading at startup cost ~15ms on launches that never touch a
+    -- notebook. lazy.nvim re-fires the event after loading the plugin.
+    event = "BufReadCmd *.ipynb",
     opts = {
       style = "markdown",
       output_extension = "md",
